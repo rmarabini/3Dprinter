@@ -56,15 +56,15 @@ module drawOcto()
 {
     if (mode2==1){
         translate([85,85,0])
-	    import("mm.stl");
+	    import("chess_2_2_mm.stl");
     } else if (mode2==2){
         translate([-85,-85,0])
-	    import("pp.stl");
+	    import("chess_2_2_pp.stl");
     } else if (mode2==3){
         translate([85,-85,0])
-	    import("mp.stl");
+	    import("chess_2_2_mp.stl");
     } else if (mode2 == 4){
         translate([-85,85,0])
-	    import("pm.stl");
+	    import("chess_2_2_pm.stl");
     }
 }
