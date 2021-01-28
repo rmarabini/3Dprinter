@@ -96,6 +96,7 @@ $fn=100;
   r=4;
   ry=r/2.;
   //cr=6;
+  /*
 difference()
 {
   union(){
@@ -128,12 +129,16 @@ difference()
     translate([-r-2.5+1,-r+1,h*3/4.+1])
     cube([r+1,ry,1], center=true);
   }
-  }
+}
 // Drill a hole for a DIN965 M3 screw with 20 mm long, and 10 mm thread.
   translate([-0, -0, -0. - h/2])
   screw_hole(DIN965, M3, 2*h, 2*h);
     }
 
+*/
+
+  translate([-0, -0, -0.])
+  screw_hole(DIN965, M3, 4.8, 4.8);
 
 
 ///////////////////////////////////////////////////////////////////////////////

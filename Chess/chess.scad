@@ -1,5 +1,5 @@
 $fn=15;//30;
-square_dim=35; // square size
+square_dim=40; // square size
 frame_width=12;
 top_left = [0, 0];
 top_right = top_left + [8 * square_dim, 0] + [frame_width/2., 0];
@@ -15,31 +15,31 @@ font1 = "Liberation Sans"; // here you can select other font type
  
 hole_reed_1 = 3;
 hole_led = square_dim - 5;
-pcb_hole = 1;
+pcb_hole = 1.;
 //==== led
-ledRadius = 2.5 + 0.25;
+ledRadius = 2.5 + 0.1;
 
 module frame(){
     difference()
     {
         dimF = 8 * square_dim + frame_width * 2;
         dim  = 8 * square_dim ;
-        translate([0,0,+h/2.+2/2.])
+        translate([0,0,+h/2.+1/2.])
         cube([dimF, dimF, h+2], center=true);
-        translate([0,0,-1+h/2+2/2.])
+        translate([0,0,-1+h/2+1/2.])
         cube([dim, dim, h+4+2], center=true);     
     }
 };
 
 module letters(){ //X 
     // print a,b,c.. in x axis
-    values= "abcdefgh"; 
+    values= "ABCDEFGH"; 
     dim  = 8 * square_dim ;
     for (i = [0:fen_x - 1]) {
         translate([-dim/2.+square_dim/2., -dim/2.-frame_width*3/4., 0] + 
                   [i*square_dim, 0,h])
             //rotate([0,0,90])
-                linear_extrude(3)
+                linear_extrude(2)
                 text(values[i], font = font1, size = frame_width - 4,
                     spacing = 1 );
                      }   
@@ -175,54 +175,80 @@ module _line(p1, p2, r=1.5, color = [1,1,0])
         translate(p2+[0,0,h/2])
         cylinder(r=r, h=h);
       }
-}
+};
 
+module screw(){
+    import ("M3_screw.stl"); 
+    };
+    
+module screewloop(){
+    dim  = 8 * square_dim ;
+    for (i = [0:1:fen_x - 1]) {
+        for (j = [0:1:fen_y - 1]) {
+            //reed1
+            t1 = [-dim/2., -dim/2., -1] + 
+                      [i*square_dim, j*square_dim, 6.0] 
+                      + [square_dim*3/4., square_dim*1/4, 0];
+            translate(t1)
+            rotate([0,180,0])
+                 screw(); 
+ 
+    }
+}};    
+offset=0.2;
 module holes(){
     // print holes for components
     dim  = 8 * square_dim ;
     for (i = [0:fen_x - 1]) {
         for (j = [0:fen_y - 1]) {
             //reed1
-            t1 = [-dim/2., -dim/2., -1] + 
+            t1 = [-dim/2.+4, -dim/2.+4, 0] + 
                       [i*square_dim, j*square_dim, 0] 
                       + [1.5, 1.5, 0];
-            translate(t1)
+            translate(t1+ [0,0,offset])
                  cylinder(r=pcb_hole, h=h+2); 
             //reed2
-            t2 = [-dim/2., -dim/2., -1] + 
+            t2 = [-dim/2., -dim/2., 0] + 
                       [i*square_dim, j*square_dim, 0]
                        + [+square_dim/2., 
-                       +square_dim/2., -1];
-            translate(t2)
+                       +square_dim/2., 0];
+            translate(t2+ [0,0,offset])
                  cylinder(r=pcb_hole, h=h+2);
            //led
-            t3 = [-dim/2., -dim/2., -1] + 
+            t3 = [-dim/2., -dim/2., 0] + 
                       [i*square_dim, j*square_dim, 0]
                       + [hole_led, hole_led, 0];
-            translate(t3)
+            translate(t3+ [0,0,offset])
             cylinder(r=ledRadius, h=h+2);
 
            //diodo
             t4 = [-dim/2., -dim/2., 0] + 
                       [i*square_dim, j*square_dim, 0] +
-                      [hole_reed_1+square_dim*11.5/24., 
-                       hole_reed_1+square_dim*11.5/24., -1];
-            translate(t4)
+                      [-hole_reed_1+square_dim*12/24., 
+                       hole_reed_1+square_dim*12/24., 0];
+            translate(t4+ [0,0,offset])
             cylinder(r=pcb_hole, h=h+2);
            
             t5 = [-dim/2., -dim/2., 0] + 
                       [i*square_dim, j*square_dim, 0] +
-                      [hole_reed_1+square_dim*16/24., 
-                       hole_reed_1+square_dim*16/24., -1];
-            translate(t5)
+                      [ -hole_reed_1+square_dim*8/24., 
+                       +hole_reed_1+square_dim*16/24., 0];
+            translate(t5+ [0,0,offset])
             cylinder(r=pcb_hole, h=h+2);
 
            //reed space
-            _line(t1, t5);
+            _line(t1, t2);
            //diod space is 
-            //_line(t2, t4);
+            _line(t4, t5);
+        //echo(t1);
+        //echo(t2);
+        //echo(t3);
+        //echo(t4);
+        //echo(t5);
             }
         }
+
+        screewloop();
 }
 module PCB()
 {
@@ -253,8 +279,25 @@ module chessBoard(){
   }
 };
 
+/*
 intersection() {
- cube([1000,1000,100]);
-    translate([square_dim, square_dim, 0])
- chessBoard();
+    translate([square_dim+5, square_dim+5, 0])
+       rotate([0,0,0])
+       cube([1000,1000,100]);
+       //cube([1000,1000,100], center=true);
+    chessBoard();
 } 
+*/
+
+intersection() {
+    //translate([-square_dim+5, -square_dim+5, 0])
+       //rotate([0,0,0])
+       //rotate([0,0,90])
+       //rotate([0,0,180])
+       rotate([0,0,270])
+       cube([1000,1000,100]);
+       //cube([1000,1000,100], center=true);
+    chessBoard();
+} 
+
+//chessBoard();
