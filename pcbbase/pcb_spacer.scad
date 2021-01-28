@@ -8,13 +8,13 @@ external_diameter = 8;
 minimum_wall_thickness = 1;
 
 // Distance between holes on X axis
-width = 75;
+width = 40;
 
 // Distance between holes on Y axis
-length = 115;
+length = 40;
 
 // Height of pillars
-height = 5;
+height = 20;
 
 // Number of cylinder segments
 hole_segments = 40;
@@ -39,6 +39,8 @@ module hide_parameters_below_this_point() {}
 // prevents coplanar polygons on cylinder subtraction
 fudge = 0.05;
 
+//offset for horizontal conextion
+z=-5; // =0;
 
 
 //HEX
@@ -71,14 +73,15 @@ union() {
     for (y=[-1:2:1]) {
         for (x=[-1:2:1]) {
             // subtract two cylinders to make a pillar
-            difference() {
+            difference() 
+                 {
                 // outside of cylinder
-                translate([x*width/2,y*length/2,0]) {
+                translate([x*width/2,y*length/2,z]) {
                     cylinder(r=external_radius, height, $fn=hole_segments); 
                 }
                 // inside of cylinder
-                translate([x*width/2,y*length/2,-fudge/2]) {
-                    cylinder(r=internal_radius, height+fudge, $fn=hole_segments); 
+                translate([x*width/2,y*length/2,-fudge/2.+z-1]) {
+                    cylinder(r=internal_radius, height+fudge-z, $fn=hole_segments); 
                 }
             }
             // connect along Y axis

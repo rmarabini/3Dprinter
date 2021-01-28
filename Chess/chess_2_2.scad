@@ -53,5 +53,5 @@ if (mode==0){
 }
 module drawOcto()
 {
-	import("chess_v2.stl");
+	import("chess.stl");
 }

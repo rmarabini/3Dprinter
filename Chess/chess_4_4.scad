@@ -6,7 +6,7 @@
 //!!!!!
 //IMPORTANT NOTE: Puzzlecut only works correctly when RENDERING (F6)!  Preview (F5) will not produce usable results!
 //!!!!!
-mode=1;
+mode=2;
 mode2=1;
 include <puzzlecutlib.scad>
 
