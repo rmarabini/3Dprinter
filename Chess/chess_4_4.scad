@@ -20,7 +20,7 @@ cutSize = 6;	//size of the puzzle cuts
 xCut1 = [-60, -20, 20, 60];       //locations of puzzle cuts relative to X axis center
 yCut1 = xCut1;       //locations of puzzle cuts 
 
-kerf = -0.15;		//supports +/- numbers (greater value = tighter fit)
+kerf = -0.125;		//supports +/- numbers (greater value = tighter fit)
 					//using a small negative number may be useful to assure easy fit for 3d printing
 					//using positive values useful for lasercutting
 					//negative values can also help visualize cuts without seperating pieces
