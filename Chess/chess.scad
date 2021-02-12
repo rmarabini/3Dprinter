@@ -9,7 +9,7 @@ top_right = top_left + [size * square_dim, 0] + [frame_width/2., 0];
 bottom_left = top_left + [0, size * square_dim, 0] + [0, frame_width/2.];
 bottom_right = top_left + [size * square_dim, size * square_dim] + [frame_width/2., frame_width/2.];
 height = 3.5;
-R = 6; // aux circle radius
+R = 6.4; // aux circle radius
 
 fen_x = size; // fenestrations on x axis
 fen_y = size; // fenestrations on y axis
