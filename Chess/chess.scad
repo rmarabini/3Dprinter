@@ -1,4 +1,4 @@
-$fn=15;//30;
+$fn=60;//30;
 square_dim=40; // square size
 size =8;
 
@@ -21,6 +21,46 @@ hole_led = square_dim - 5;
 pcb_hole = 1.;
 //==== led
 ledRadius = 2.5 + 0.1;
+
+square = true; // print square
+board = false; // print board 
+
+module escaque(){
+        cube([square_dim-0.02,square_dim-0.02,1]);
+}
+module escaqueW(){
+        color("white", 1){
+        escaque();
+    }
+}
+module escaqueB(){
+        color("black", 1){
+        escaque();
+    }
+}
+
+
+if (square){
+//for(x=[-4:1:3]){
+//    for(y=[-4:1:3]){
+for(x=[0:1:0]){
+    for(y=[0:1:0]){
+        translate([x* square_dim , y * square_dim, 1]) 
+        difference(){
+        if ((abs(x)+abs(y))%2 == 1){
+            escaqueW();}
+        else{
+            escaqueB();}
+            
+            
+        //led
+        t3 = [hole_led, hole_led, 0];
+        translate(t3+ [0,0,offset])
+        cylinder(r=ledRadius, h=h+2);
+        }
+    }
+}
+}// if squre end
 
 module nodes(){
     // print small circle in square corner
@@ -269,4 +309,6 @@ module drawDemoObject(){
  }
 }
 
+if (board){
 drawDemoObject();
+}

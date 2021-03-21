@@ -4,7 +4,7 @@ $fa=3;
 
 diameter2= 5;
 diameter = 4.25;
-height = 20;
+height = 16;
 height2 = 30;
 
 pin_diameter = 0.90;
@@ -16,7 +16,7 @@ difference(){
 //cylinder(height, diameter2, diameter2);
 // hex bit handle for electric screwdriver
    linear_extrude(height=height)
-			regular_polygone(6,3.5);
+			regular_polygone(6,3.55);
 //hole for back screw
 //   cylinder(16, 2.5/2, 2.5/2);        
     import("M25_screw.stl");

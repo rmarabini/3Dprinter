@@ -40,7 +40,7 @@ module hide_parameters_below_this_point() {}
 fudge = 0.05;
 
 //offset for horizontal conextion
-z=-5; // =0;
+z=0; // =0;
 
 
 //HEX
@@ -80,7 +80,7 @@ union() {
                     cylinder(r=external_radius, height, $fn=hole_segments); 
                 }
                 // inside of cylinder
-                translate([x*width/2,y*length/2,-fudge/2.+z-1]) {
+                translate([x*width/2,y*length/2,-fudge/2.+z]) {
                     cylinder(r=internal_radius, height+fudge-z, $fn=hole_segments); 
                 }
             }
