@@ -9,8 +9,15 @@ top_right = top_left + [size * square_dim, 0] + [frame_width/2., 0];
 bottom_left = top_left + [0, size * square_dim, 0] + [0, frame_width/2.];
 bottom_right = top_left + [size * square_dim, size * square_dim] + [frame_width/2., frame_width/2.];
 height = 3.5;
-R = 6.4; // aux circle radius
-
+square = true; // print square
+board = false; // print board 
+R = 6.4 +0.1;
+if (true){
+    R = 6.4 + 0.2; // aux circle radius
+}
+if (board==true){
+    R = 6.4; // aux circle radius
+}
 fen_x = size; // fenestrations on x axis
 fen_y = size; // fenestrations on y axis
 
@@ -20,13 +27,17 @@ hole_reed_1 = 3;
 hole_led = square_dim - 5;
 pcb_hole = 1.;
 //==== led
-ledRadius = 2.5 + 0.1;
+ledRadius = 2.5 + 0.05;
 
-square = true; // print square
-board = false; // print board 
 
 module escaque(){
-        cube([square_dim-0.02,square_dim-0.02,1]);
+        union(){
+        translate([.5,.5,.8])
+        cube([square_dim-1.75,square_dim-1.75,1]);
+        translate([square_dim/2 - square_dim*5/16,
+                   square_dim/2 - square_dim*5/16,- 1.8])
+        cube([square_dim*5/8,square_dim*5/8,2.5]);
+        }
 }
 module escaqueW(){
         color("white", 1){
@@ -40,7 +51,8 @@ module escaqueB(){
 }
 
 
-if (square){
+    
+module mySquare(){
 //for(x=[-4:1:3]){
 //    for(y=[-4:1:3]){
 for(x=[0:1:0]){
@@ -48,15 +60,15 @@ for(x=[0:1:0]){
         translate([x* square_dim , y * square_dim, 1]) 
         difference(){
         if ((abs(x)+abs(y))%2 == 1){
-            escaqueW();}
-        else{
             escaqueB();}
+        else{
+            escaqueW();}
             
             
         //led
         t3 = [hole_led, hole_led, 0];
         translate(t3+ [0,0,offset])
-        cylinder(r=ledRadius, h=h+2);
+        cylinder(r=ledRadius+0.1, h=h+2);
         }
     }
 }
@@ -181,9 +193,11 @@ module screewloop(){
     }
 }; 
 
-module diagonals(){    
+module diagonals(){
+    union(){    
     diagonals1();
     diagonals2();
+    }
 }
 
 module grid(){
@@ -312,3 +326,10 @@ module drawDemoObject(){
 if (board){
 drawDemoObject();
 }
+//
+difference(){
+   mySquare();
+   grid();     
+}
+//drawDemoObject();
+
