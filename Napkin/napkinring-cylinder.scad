@@ -34,7 +34,7 @@ difference()
 				//Rotate 360/namecount for each iteration
 				rotate([0,0,z * 360 / nameCount])
 					//Write the Name
-					writecylinder(name,[0,0,0],radius,t=namedepth, h=height/3*1.8, rounded=1);
+					writecylinder(name,[0,0,0],radius,t=namedepth, height=height/3*1.8, rounded=1);
 			}		
 	}
 	//Remove Center

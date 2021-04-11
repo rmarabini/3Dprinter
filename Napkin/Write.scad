@@ -67,7 +67,7 @@ http://creativecommons.org/licenses/by/3.0/
 // Its tedious and time consuming, but not very hard
 
 
-module writecylinder(text,where,radius,height){
+module writecylinder(text,where,radius,t,height,rounded){
 	wid=(.125* h *5.5 * space);
 	widall=wid*(len(text)-1)/2; 
 	//angle that measures width of letters on sphere
@@ -168,6 +168,7 @@ module writecircle(text,where,radius){
 }
 
 module writethecylinder(text,where,radius,height,r1,r2){
+
 	wid=(.125* h *5.5 * space);
 	widall=wid*(len(text)-1)/2; 
 	//angle that measures width of letters on sphere
@@ -282,8 +283,8 @@ module writethecube(text,where,size){
 		}
 }
 
-module write(word){
-	
+//module write(word){
+module write(word, t = 2, h = 12, rotate = 0, center=true, font="Letters.dxf"){	
 	echo (h);
 	echo (word);
 	echo ("There are " ,len(word) ," letters in this string");

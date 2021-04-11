@@ -9,11 +9,11 @@ top_right = top_left + [size * square_dim, 0] + [frame_width/2., 0];
 bottom_left = top_left + [0, size * square_dim, 0] + [0, frame_width/2.];
 bottom_right = top_left + [size * square_dim, size * square_dim] + [frame_width/2., frame_width/2.];
 height = 3.5;
-square = true; // print square
-board = false; // print board 
-R = 6.4 +0.1;
+square = false; // print square
+board = true; // print board 
+R = 6.4;
 if (true){
-    R = 6.4 + 0.2; // aux circle radius
+    R = 6.4 + 0.1; // aux circle radius
 }
 if (board==true){
     R = 6.4; // aux circle radius

@@ -13,13 +13,15 @@ awg=0.5;
 
 difference(){
 //handle for manual tool
-//cylinder(height, diameter2, diameter2);
+cylinder(height, diameter2, diameter2);
 // hex bit handle for electric screwdriver
-   linear_extrude(height=height)
+/*   linear_extrude(height=height)
 			regular_polygone(6,3.55);
+    
 //hole for back screw
 //   cylinder(16, 2.5/2, 2.5/2);        
     import("M25_screw.stl");
+*/
 }
 translate([0, 0, height]) {
     difference() {

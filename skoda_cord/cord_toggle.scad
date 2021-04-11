@@ -14,9 +14,9 @@ module holes () {
 	union(){
 		translate([0,0,-dia/2])
 			cylinder(h=coneHeight,r1=coneDia/2,r2=0,$fn=72);
-		translate([-dia/2,-dia/2,-dia*5/4])
-			cube(dia);
-		translate([0,0,-dia])
-			cylinder(r=holeDia/2,h=dia*2,$fn=36);
+		//translate([-dia/2,-dia/2,-dia*5/4])
+		//	cube(dia);
+		//translate([0,0,-dia])
+		//	cylinder(r=holeDia/2,h=dia*2,$fn=36);
 	}
 }
