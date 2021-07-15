@@ -19,16 +19,17 @@ cutInTwo(); //cuts in two along y axis
 module cutInTwo()
 {
 
-        translate([-m,0,0])
+     /*   translate([-m,0,0])
         yFemaleCut()  drawOcto1();
         translate([m,0,0])
         yMaleCut()  drawOcto1();
-    /*
-        translate([-m,0,0])
-        yFemaleCut() drawOcto2();
+    */
+    
+        //translate([-m,0,0])
+        //yFemaleCut() drawOcto2();
         translate([m,0,0])
         yMaleCut() drawOcto2();
-*/
+
 }
 
 module drawOcto1()

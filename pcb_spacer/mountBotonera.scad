@@ -16,7 +16,7 @@ bh =6;
 br = 5;
 ph = 6;
 
-// pins
+// pins 94, 4
 pin1 = [13.3, y, z];
 pin2 = [14.3, yp, z];
 pin3 = [119.3, yp, z];
