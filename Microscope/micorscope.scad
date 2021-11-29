@@ -31,12 +31,12 @@ ecr = 26 ; // cylinder end cap radius
 
 laserRadius = 5; // laser radius
 syringeRadius = 16.5 / 2 ; // srynge radius
-syringeRadius1 = 9.5 /2  ; // srynge radius at syringeHeight1
+syringeRadius1 = 16.5/2; //9.5 /2  ; // srynge radius at syringeHeight1
 syringeRadius2 = 2  ; // srynge radius at syringeHeight1
 
-syringeHeight = 58.5 ; // srynge height
-syringeHeight1 = 10; //
-syringeHeight2 = 23; //
+syringeHeight = 58.5 +15; // srynge height
+syringeHeight1 = 15 + 15; //
+syringeHeight2 = 18; //
 syringeHeight3 = 25; //
 
 module cap(){
@@ -63,8 +63,8 @@ module front(){
                 translate(v=[0,-laserRadius - 5, ecr/4 + 4]){
                     rotate(90, [1,0,0]){
                         cylinder(h = syringeHeight, r = syringeRadius+2);
-                    }
-                }
+                    } // rot
+                }// tran
             } //union u1end  
 
             translate(v=[-ecr*1.5,0,0]){
@@ -76,12 +76,13 @@ module front(){
             }
             //pasing laser hole
             translate(v=[0,-laserRadius - 5, 0]){
-                cylinder(h = ech*2.5, r = laserRadius*3/4.);
+                cylinder(h = ech*2.5, r2 = laserRadius*5/8.,
+                                      r1 = laserRadius*6/4.);
             }
             //srynge level 1
             translate(v=[0,-laserRadius - 5 - syringeHeight + syringeHeight1 , ecr/4 + 4]){
                 rotate(90, [1,0,0])
-                    cylinder(h = syringeHeight1, r = syringeRadius);
+                    cylinder(h = syringeHeight1+15, r = syringeRadius);
                 }
             //srynge level 2
             translate(v=[0,-laserRadius - 5 - syringeHeight + syringeHeight1 + syringeHeight2  , ecr/4 + 4]){
@@ -99,5 +100,5 @@ module front(){
   } // translate t1 end
 }
 
-cap();
-//front();
+//cap();
+front();
