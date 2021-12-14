@@ -69,7 +69,8 @@ for(x=[0:1:0]){
         //led
         t3 = [hole_led, hole_led, 0];
         translate(t3+ [0,0,offset])
-        cylinder(r=ledRadius+0.1, h=h+2);
+        //cylinder(r=ledRadius+0.1, h=h+2);
+        cylinder(r=ledRadius+0.1, h=0);
         }
     }
 }
