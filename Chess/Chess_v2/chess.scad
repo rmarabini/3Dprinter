@@ -25,9 +25,9 @@ font1 = "Liberation Sans"; // here you can select other font type
  
 hole_reed_1 = 3;
 hole_led = square_dim - 5;
-pcb_hole = 1.;
+pcb_hole = 0.75;
 //==== led
-ledRadius = 2.5 + 0.05;
+ledRadius = 2.5 ;//+ 0.05;
 
 
 module escaque(){
@@ -163,14 +163,14 @@ module diagonals2()
 
 };
 
-module _line(p1, p2, r=1.5, color = [1,1,0])
+module _line(p1, p2, r=1.5, color = [1,1,0], z=0)
 {
     //print a cylinder from p1 to p2
     color(color)
       hull(){
-        translate(p1+[0,0,-0.75])
+        translate(p1+[0,0,-0.75+z])
         cylinder(r=r, h=h);
-        translate(p2+[0,0,-0.75])
+        translate(p2+[0,0,-0.75+z])
         cylinder(r=r, h=h);
       }
 };
@@ -255,9 +255,11 @@ module holes(){
             cylinder(r=pcb_hole, h=h+2);
 
            //reed space
-            _line(t1, t2);
+            _line(t1, t2, r=1.1);  // small filament
+            _line(t1-(t2-t1), t2 + (t2-t1), r=0.7, z = .8);
+            //echo("t2-t1", (t2-t1)*4.4/8.);
            //diod space is 
-            _line(t4, t5);
+            _line(t4, t5, r=.75);
         //echo(t1);
         //echo(t2);
         //echo(t3);
