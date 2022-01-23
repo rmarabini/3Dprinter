@@ -6,9 +6,9 @@
 //!!!!!
 //IMPORTANT NOTE: Puzzlecut only works correctly when RENDERING (F6)!  Preview (F5) will not produce usable results!
 //!!!!!
-mode = 2;
+mode = 4;
 include <puzzlecutlib.scad>
-
+include <chess.scad>
 stampSize = [340,340,100];		//size of cutting stamp (should cover 1/2 of object)
 
 cutSize = 6;	//size of the puzzle cuts
@@ -28,30 +28,31 @@ kerf = -0.125;		//supports +/- numbers (greater value = tighter fit)
 //cutInEight();	//cuts in four along x / y axis
 p = 6;
 m = -6;
-cutInFour();
+//cutInFour22();
 
-module cutInFour()
+module cutInFour22()
 {
     
     if (mode == 1) {
 	    translate([p,m,0])
-		xMaleCut() yMaleCut() drawOcto();
+		xMaleCut() yMaleCut() drawOcto22();
     } else if (mode == 2){
   	    translate([m,m,0])
-		xMaleCut() yFemaleCut() drawOcto();
+		xMaleCut() yFemaleCut() drawOcto22();
     } else if (mode == 3) {
          translate([p,p,0])
-		xFemaleCut() yMaleCut() drawOcto();
+		xFemaleCut() yMaleCut() drawOcto22();
     } else if (mode == 4){
      	translate([m,p,0])
-	    xFemaleCut() yFemaleCut() drawOcto();
+	    xFemaleCut() yFemaleCut() drawOcto22();
     }
 }
 
 if (mode==0){    
-    drawOcto(); 
+    drawOcto22(); 
 }
-module drawOcto()
+module drawOcto22()
 {
-	import("chess.stl");
+	//import("chess.stl");
+    chessBoard();
 }
