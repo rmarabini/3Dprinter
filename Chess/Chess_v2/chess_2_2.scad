@@ -53,6 +53,6 @@ if (mode==0){
 }
 module drawOcto22()
 {
-	//import("chess.stl");
+	//import("chess.stl"); //faster but less robust
     chessBoard();
 }

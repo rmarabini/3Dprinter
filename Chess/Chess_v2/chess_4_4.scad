@@ -61,11 +61,12 @@ module drawOcto()
     //mode2=3;
     if (mode2==1){
         translate([85,85,0])
-	    import("chess_2_2_mm.stl");
-        //cutInFour22();
+	    //import("chess_2_2_mm.stl");
+        cutInFour22();
     } else if (mode2==2){
         translate([-85,-85,0])
-	    import("chess_2_2_pp.stl");
+	    //import("chess_2_2_pp.stl");
+        cutInFour22();
     } else if (mode2==3){
         translate([85,-85,0])
 	    //import("chess_2_2_mp.stl");
@@ -73,6 +74,7 @@ module drawOcto()
         echo ("3333333 chess_2_2_mp.stl");
     } else if (mode2 == 4){
         translate([-85,85,0])
-	    import("chess_2_2_pm.stl");
+	    //import("chess_2_2_pm.stl");
+        cutInFour22();
     }
 }
