@@ -24,7 +24,7 @@ base_inner_circle = 69 /2.;
 base_outter_circle = 84 /2.;
 base_pie_angle = 55. ;
 
-base_rectangle_base = 30;
+base_rectangle_base = 31.5;
 // Brim (Bottom Flat Cylinder)
 module brim(){
     color([0,0,1])
