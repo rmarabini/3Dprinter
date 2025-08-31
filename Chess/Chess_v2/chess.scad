@@ -255,8 +255,8 @@ module holes(){
             cylinder(r=pcb_hole, h=h+2);
 
            //reed space
-            _line(t1, t2, r=1.1);  // small filament
-            _line(t1-(t2-t1), t2 + (t2-t1), r=0.7, z = .8);
+            _line(t1 + (t2-t1)*.15, t2+ (-t2+t1)*.15, r=1.1);  // small filament
+            _line(t1-(t2-t1), t2 + (t2-t1), r=0.7, z = 1.1);
             //echo("t2-t1", (t2-t1)*4.4/8.);
            //diod space is 
             _line(t4, t5, r=.75);
@@ -328,13 +328,15 @@ module drawDemoObject(){
  }
 }
 
-if (board){
-drawDemoObject();
+module chessBoard(){
+    if (board){
+    drawDemoObject();
+    }
+
+    difference(){
+       mySquare();
+       grid();     
+    }
 }
-//
-difference(){
-   mySquare();
-   grid();     
-}
-//drawDemoObject();
+//chessBoard();
 
