@@ -104,9 +104,111 @@ module plate(){
     }
 }
 
+// Module definition
+module right_triangle_prism(base = 30, height = 20, thickness = 5, rotation = 0) {
+    rotate([0, 0, rotation])
+        polyhedron(
+            points = [
+                [0, -thickness/2., 0],     // 0: origin
+                [base, -thickness/2., 0],   // 1: along x-axis
+                [0, -thickness/2., height], // 2: up in Z (height)
+                [0, thickness/2., 0],    // 3: extruded origin (Y)
+                [base, thickness/2., 0],    // 4: extruded x (Y)
+                [0, thickness/2., height]   // 5: extruded z (Y)
+            ],
+            faces = [
+                [0, 1, 2],       // front triangle
+                [3, 5, 4],       // back triangle
+                [0, 3, 4, 1],    // bottom rectangle
+                [1, 4, 5, 2],    // slanted side
+                [2, 5, 3, 0]     // vertical side
+            ]
+        );
+}
+
+
+module cap(){
+    Dout = 52; // outter diameter  
+    Din = 44;  // inner diameter
+    H = 16;
+    HH = 21 - H;
+    h = 10 ; // upper small cylider
+    Dupper = 25; // upper small cylinder radius
+    difference(){
+        union(){
+            cylinder(h=H, d=Dout);
+            translate([0,0,H]){
+                color([1,0,0]) 
+                cylinder(h=HH*2, d=Dout);
+            }
+            /*
+            translate([0,0,H+HH]){
+                color([0,1,0]) 
+                cylinder(h=h, d=Dupper);
+            }
+            rotate([0,0,0]){
+            translate([Dupper/2,0,H+HH]){
+                color([0,0,1]) 
+                right_triangle_prism(base = (Dout - Dupper)/2,
+                                 height = h,
+                                 thickness = 5,
+                                 rotation = 0);
+            }}
+            rotate([0,0,60]){
+            translate([Dupper/2,0,H+HH]){
+                color([0,0,1]) 
+                right_triangle_prism(base = (Dout - Dupper)/2,
+                                 height = h,
+                                 thickness = 5,
+                                 rotation = 0);
+            }}
+            rotate([0,0,120]){
+            translate([Dupper/2,0,H+HH]){
+                color([0,0,1]) 
+                right_triangle_prism(base = (Dout - Dupper)/2,
+                                 height = h,
+                                 thickness = 5,
+                                 rotation = 0);
+            }}
+            rotate([0,0,180]){
+            translate([Dupper/2,0,H+HH]){
+                color([0,0,1]) 
+                right_triangle_prism(base = (Dout - Dupper)/2,
+                                 height = h,
+                                 thickness = 5,
+                                 rotation = 0);
+            }}
+            rotate([0,0,240]){
+            translate([Dupper/2,0,H+HH]){
+                color([0,0,1]) 
+                right_triangle_prism(base = (Dout - Dupper)/2,
+                                 height = h,
+                                 thickness = 5,
+                                 rotation = 0);
+            }}
+            rotate([0,0,300]){
+            translate([Dupper/2,0,H+HH]){
+                color([0,0,1]) 
+                right_triangle_prism(base = (Dout - Dupper)/2,
+                                 height = h,
+                                 thickness = 5,
+                                 rotation = 0);
+            }}*/
+        
+        }
+        union(){
+            cylinder(h=H, d=Din);
+            cylinder(h=HH+H+h, d=m);
+        }
+    } // difference end
+}
+
+
 
 /* bellow uncomment (remove the "//") the part you want to generate */ 
 
-drive_side();
- //ndrive_side();
+//drive_side();
+//ndrive_side();
 // plate();
+
+cap();
